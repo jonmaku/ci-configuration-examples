@@ -1,5 +1,5 @@
 % Data
-lebron_per_year =  [2003 20.9;
+lebron_ppg_per_year =  [2003 20.9;
                     2004 27.2;
                     2005 31.4;
                     2006 27.3;
@@ -21,38 +21,80 @@ lebron_per_year =  [2003 20.9;
                     2022 28.9;
                     2023 25.7;
                     2024 25.1];
+lebron_mpg_per_year = [2003 39.5;
+                    2004 42.4;
+                    2005 42.5;
+                    2006 40.9;
+                    2007 40.4;
+                    2008 37.7;
+                    2009 39.0;
+                    2010 38.8;
+                    2011 37.5;
+                    2012 37.9;
+                    2013 37.7;
+                    2014 36.1;
+                    2015 35.6;
+                    2016 37.8;
+                    2017 36.9;
+                    2018 35.2;
+                    2019 34.6;
+                    2020 33.4;
+                    2021 37.2;
+                    2022 35.5;
+                    2023 35.3;
+                    2024 34.9];
 
 % Extract year and points per game
-year = lebron_per_year(:,1);
-pointspergame = lebron_per_year(:,2);
+year = lebron_ppg_per_year(:,1);
+pointspergame = lebron_ppg_per_year(:,2);
+minutespergame = lebron_mpg_per_year(:,2);
 
 % Bar chart
 figure;
 hold on
 bar(year, pointspergame)
-title('Lebron Point Averages by Calendar Year', 'FontSize', 16)
-xlabel('Year', 'FontSize', 16);
-ylabel('Points', 'FontSize', 16);
-set(gca, 'FontSize', 16)
+title('Lebron Point Averages by Season', 'FontSize', 12)
+xlabel('Year', 'FontSize', 12);
+ylabel('Points', 'FontSize', 12);
+set(gca, 'FontSize', 12)
+box on
+grid on
 
-% Polynomial fit (3rd degree)
+% Polynomial fit (2nd degree)
 p = polyfit(year, pointspergame, 2);
-
-% Generate smooth curve for plotting
 year_fine = linspace(min(year), max(year), 100); % More points for a smooth curve
 points_fit = polyval(p, year_fine);
 
 % Plot the polynomial fit
-plot(year_fine, points_fit, 'r-', 'LineWidth', 2)
-
-legend('Actual Points per Game', '3rd Degree Polynomial Fit', 'Location', 'Best')
+plot(year_fine, points_fit, 'r-', 'LineWidth', 2, 'LineStyle','-')
+legend('Actual Points per Game','Fitted Line')
 
 hold off
 
-% Predict points per game in 2027
+% Predict points, and other analytics
 year_pred = 2040;
 points_pred = polyval(p, year_pred)
 
 % Display the prediction
-fprintf("Projected PPG for LeBron in 2027: %.2f\n", points_pred);
-69 funny number 79898
+fprintf("Projected PPG for LeBron in 2040: %.2f\n", points_pred);
+
+figure;
+hold on
+bar(year, minutespergame)
+title('Lebron Minute Averages by Season', 'FontSize', 12)
+xlabel('Year', 'FontSize', 12);
+ylabel('Minutes', 'FontSize', 12);
+set(gca, 'FontSize', 12)
+box on
+grid on
+
+% Polynomial fit (2nd degree)
+p = polyfit(year, minutespergame, 2);
+year_fine = linspace(min(year), max(year), 100); % More points for a smooth curve
+points_fit = polyval(p, year_fine);
+
+% Plot the polynomial fit
+plot(year_fine, points_fit, 'r-', 'LineWidth', 2, 'LineStyle','-')
+legend('Actual Minutes per Game','Fitted Line')
+
+hold off
