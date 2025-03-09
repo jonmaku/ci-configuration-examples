@@ -20,3 +20,12 @@ lebron_per_year =  [2003 20.9;
                     2022 28.9;
                     2023 25.7;
                     2024 25.1]
+year= lebron_per_year(:,1)
+pointspergame = lebron_per_year(:,2)
+xaxis = year'
+f1=figure; 
+bar(xaxis, pointspergame)
+title('Lebron Point Averages by Calender Year', 'FontSize', 16)
+xlabel('Year', 'FontSize', 16);
+ylabel('Points', 'FontSize', 16);
+set(gca, 'FontSize', 16)
