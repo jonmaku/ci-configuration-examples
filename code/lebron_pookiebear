@@ -55,4 +55,4 @@ points_pred = polyval(p, year_pred)
 
 % Display the prediction
 fprintf("Projected PPG for LeBron in 2027: %.2f\n", points_pred);
-69 funny number
+69 funny number 79898
