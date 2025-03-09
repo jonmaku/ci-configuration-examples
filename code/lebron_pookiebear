@@ -1,3 +1,4 @@
+Lebron
 % Data
 lebron_ppg_per_year =  [2003 20.9;
                     2004 27.2;
@@ -52,8 +53,8 @@ minutespergame = lebron_mpg_per_year(:,2);
 % Bar chart
 figure;
 hold on
-bar(year, pointspergame)
-title('Lebron Point Averages by Season', 'FontSize', 12)
+bar(year, pointspergame, 'FaceColor', [0.3333, 0.1451, 0.8387], 'BarWidth', 0.8, 'EdgeColor', 'k')
+title('Lebron Points Average by Season', 'FontSize', 12)
 xlabel('Year', 'FontSize', 12);
 ylabel('Points', 'FontSize', 12);
 set(gca, 'FontSize', 12)
@@ -66,8 +67,8 @@ year_fine = linspace(min(year), max(year), 100); % More points for a smooth curv
 points_fit = polyval(p, year_fine);
 
 % Plot the polynomial fit
-plot(year_fine, points_fit, 'r-', 'LineWidth', 2, 'LineStyle','-')
-legend('Actual Points per Game','Fitted Line')
+plot(year_fine, points_fit, 'Color', [1, 0.73, 0.1529], 'LineWidth', 2)
+legend('Lebron Points Average Per Regular Season','Fitted Line')
 
 hold off
 
@@ -80,21 +81,23 @@ fprintf("Projected PPG for LeBron in 2040: %.2f\n", points_pred);
 
 figure;
 hold on
-bar(year, minutespergame)
-title('Lebron Minute Averages by Season', 'FontSize', 12)
+bar(year, minutespergame, 'FaceColor', [0.3333, 0.1451, 0.8387], 'BarWidth', 0.8, 'EdgeColor', 'k')
+title('Lebron Minutes Average by Season', 'FontSize', 12)
 xlabel('Year', 'FontSize', 12);
 ylabel('Minutes', 'FontSize', 12);
 set(gca, 'FontSize', 12)
 box on
 grid on
 
-% Polynomial fit (2nd degree)
-p = polyfit(year, minutespergame, 2);
-year_fine = linspace(min(year), max(year), 100); % More points for a smooth curve
-points_fit = polyval(p, year_fine);
+% Polynomial fit (2nd degree) 
+j = polyfit(year, minutespergame, 2);
+year_fine = linspace(min(year), max(year), 100);
+minutes_fit = polyval(j, year_fine);
 
 % Plot the polynomial fit
-plot(year_fine, points_fit, 'r-', 'LineWidth', 2, 'LineStyle','-')
-legend('Actual Minutes per Game','Fitted Line')
-
+plot(year_fine, minutes_fit, 'Color', [1, 0.73, 0.1529], 'LineWidth', 2)
+legend('Lebron Minutes Average Per Regular Season','Fitted Line')
 hold off
+
+%year of retirement prediction
+R = []
