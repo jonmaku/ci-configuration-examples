@@ -1,3 +1,43 @@
+%SIMPLIFIED CODE HERE
+% Data
+lebron_ppg_per_year =  [2003 20.9;2004 27.2; 2005 31.4; 2006 27.3; 2007 30.0; 2008 28.4; 2009 29.7; 2010 26.7; 2011 27.1; 2012 26.8; 2013 27.1; 2014 25.3; 2015 25.3; 2016 26.4; 2017 27.5;2018 27.4; 2019 25.3; 2020 25.0; 2021 30.3; 2022 28.9;2023 25.7; 2024 25.1];
+
+% Extract year and points per game
+year = lebron_ppg_per_year(:,1);
+pointspergame = lebron_ppg_per_year(:,2);
+
+% Bar chart
+figure;
+hold on
+bar(year, pointspergame, 'FaceColor', [0.3333, 0.1451, 0.8387], 'BarWidth', 0.8, 'EdgeColor', 'k')
+title('Lebron Points Average by Season', 'FontSize', 12)
+xlabel('Year', 'FontSize', 12);
+ylabel('Points', 'FontSize', 12);
+set(gca, 'FontSize', 12)
+box on
+grid on
+
+% Least Squares polynomial fit
+p = polyfit(year, pointspergame, 2);
+year_fine = linspace(min(year), max(year), 100); % More points for a smooth curve
+points_fit = polyval(p, year_fine);
+plot(year_fine, points_fit, 'Color', [1, 0.73, 0.1529], 'LineWidth', 2)
+legend('Lebron Points Average Per Regular Season','Fitted Line')
+hold off
+
+% Predict points, and other analytics
+year_pred = 2040;
+points_pred = polyval(p, year_pred);
+
+%Display the prediction
+fprintf("Projected PPG for LeBron in 2040: %.2f\n", points_pred);
+
+
+
+
+%ORIGINAL CODE HERE
+
+
 Lebron
 % Data
 lebron_ppg_per_year =  [2003 20.9;
