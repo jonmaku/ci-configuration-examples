@@ -90,14 +90,47 @@ box on
 grid on
 
 % Polynomial fit (2nd degree) 
-j = polyfit(year, minutespergame, 2);
+k = polyfit(year, minutespergame, 2);
 year_fine = linspace(min(year), max(year), 100);
-minutes_fit = polyval(j, year_fine);
+minutes_fit = polyval(k, year_fine);
 
 % Plot the polynomial fit
 plot(year_fine, minutes_fit, 'Color', [1, 0.73, 0.1529], 'LineWidth', 2)
 legend('Lebron Minutes Average Per Regular Season','Fitted Line')
 hold off
 
-%year of retirement prediction
-R = []
+%year of retirement prediction ,mpg, ppg
+R = [37.0 20.0; 43.2 13.2; 22.2 10.1; 36.9 20.2; 20.3 9.2; 25.2 8.6; 28.2 17.6; 22.6 7.1; 35.4 12.7; 31.2 20.3; 32.7 13.2; 14.6 3.2; 8.8 2.9; 32.0 16.8; 26.2 8.5; 15.6 7.3; 31.0 14.5; 27.7 10.8]
+%divide column 1/ column 2, sum, divide new sum by size
+S = size(R)
+father_time = sum(R(:,2)./R(:,1))/S(1,1)
+%for loop using p and j polyfit until lebron retires
+% Start at the last available year
+year_future = max(year);
+ppm_future = pointspergame(end) / minutespergame(end);
+
+% Iterate year by year into the future
+while ppm_future > father_time
+    % Increase year
+    year_future = year_future + 1;
+
+    % Predict points and minutes per game
+    ppg_future = polyval(p, year_future);
+    mpg_future = polyval(k, year_future);
+
+    % Avoid division by zero or unrealistic negative values
+    if mpg_future <= 0 || ppg_future <= 0
+        fprintf("LeBron's MPG or PPG reached zero, retiring in %d.\n", year_future);
+        break;
+    end
+
+    % Compute future PPM
+    ppm_future = ppg_future / mpg_future;
+    
+end
+
+% Final Retirement Year
+fprintf("LeBron is projected to retire in %d when PPM falls below %.4f\n", ...
+        year_future, father_time);
+fprintf("Year: %d | PPG: %.2f | MPG: %.2f | PPM: %.4f\n", ...
+            year_future, ppg_future, mpg_future, ppm_future);
