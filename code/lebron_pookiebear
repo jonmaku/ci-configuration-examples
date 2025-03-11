@@ -184,7 +184,7 @@ atoms = Dendrimer(:,2);
 figure;
 hold on
 bar(generation, atoms, 'FaceColor', [0.3333, 0.1451, 0.8387], 'BarWidth', 0.8, 'EdgeColor', 'k')
-title('Dendrimer', 'FontSize', 12)
+title('PAMAM Dendrimer', 'FontSize', 12)
 xlabel('generation', 'FontSize', 12);
 ylabel('atoms', 'FontSize', 12);
 set(gca, 'FontSize', 12)
