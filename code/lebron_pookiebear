@@ -202,6 +202,9 @@ legend('atoms  Per generation','Fitted Line')
 
 hold off
 
+xlim([-1.2 12.2])
+ylim([-50000 300000])
+
 % Predict atoms, and other analytics
 generation_pred = 100;
 atoms_pred = polyval(p, generation_pred)
