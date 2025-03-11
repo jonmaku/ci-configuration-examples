@@ -184,7 +184,7 @@ atoms = Dendrimer(:,2);
 figure;
 hold on
 bar(generation, atoms, 'FaceColor', [0.3333, 0.1451, 0.8387], 'BarWidth', 0.8, 'EdgeColor', 'k')
-title('atoms per generation', 'FontSize', 12)
+title('Dendrimer', 'FontSize', 12)
 xlabel('generation', 'FontSize', 12);
 ylabel('atoms', 'FontSize', 12);
 set(gca, 'FontSize', 12)
@@ -211,6 +211,8 @@ atoms_pred = polyval(p, generation_pred)
 
 % Display the prediction
 fprintf("Projected atoms in 100th generation: %.2f\n", atoms_pred);
+
+
 
 
 
