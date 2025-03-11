@@ -174,3 +174,40 @@ fprintf("LeBron is projected to retire in %d when PPM falls below %.4f\n", ...
         year_future, father_time);
 fprintf("Year: %d | PPG: %.2f | MPG: %.2f | PPM: %.4f\n", ...
             year_future, ppg_future, mpg_future, ppm_future);
+
+%Dendrimer code:
+Dendrimer = [0 84; 1 228; 2 516; 3 1092; 4 2244; 5 4548; 6 9156; 7 18372; 8 36804; 9 73668; 10 147396; 11 294852]
+generation = Dendrimer(:,1);
+atoms = Dendrimer(:,2);
+
+% Bar chart
+figure;
+hold on
+bar(generation, atoms, 'FaceColor', [0.3333, 0.1451, 0.8387], 'BarWidth', 0.8, 'EdgeColor', 'k')
+title('atoms per generation', 'FontSize', 12)
+xlabel('generation', 'FontSize', 12);
+ylabel('atoms', 'FontSize', 12);
+set(gca, 'FontSize', 12)
+box on
+grid on
+
+% Polynomial fit (2nd degree)
+p = polyfit(generation, atoms, 6);
+generation_fine = linspace(min(generation), max(generation), 100); % More atoms for a smooth curve
+atoms_fit = polyval(p, generation_fine);
+
+% Plot the polynomial fit
+plot(generation_fine, atoms_fit, 'Color', [1, 0.73, 0.1529], 'LineWidth', 2)
+legend('atoms  Per generation','Fitted Line')
+
+hold off
+
+% Predict atoms, and other analytics
+generation_pred = 100;
+atoms_pred = polyval(p, generation_pred)
+
+% Display the prediction
+fprintf("Projected atoms in 100th generation: %.2f\n", atoms_pred);
+
+
+
